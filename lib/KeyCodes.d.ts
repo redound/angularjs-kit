@@ -1,0 +1,20 @@
+declare var _default: {
+    BACKSPACE: number;
+    TAB: number;
+    ENTER: number;
+    ESCAPE: number;
+    SPACE: number;
+    PAGE_UP: number;
+    PAGE_DOWN: number;
+    END: number;
+    HOME: number;
+    LEFT: number;
+    UP: number;
+    RIGHT: number;
+    DOWN: number;
+    DELETE: number;
+    V: number;
+    COMMA: number;
+    PERIOD: number;
+};
+export default _default;
