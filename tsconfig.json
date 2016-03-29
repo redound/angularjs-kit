@@ -16,13 +16,7 @@
     "!./node_modules/**/*.ts"
   ],
   "files": [
-    "./src/SvgIcon/SvgIcon.ts",
-    "./src/SvgIcon/SvgIconDirective.ts",
-    "./src/SvgIcon/SvgIconProvider.ts",
-    "./src/SvgIcon/SvgIcon.ts",
-    "./src/KeyCodes.ts",
-    "./src/View.ts",
-    "./src/index.ts",
+    "./src/angularjs-kit.ts",
     "./typings/main.d.ts"
   ]
 }
