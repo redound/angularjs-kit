@@ -10,8 +10,7 @@ export default class Bootstrap {
         this._executables = <any>arguments;
     }
 
-    public run() {
-        var args = arguments;
+    public run(...args) {
         _.each(this._executables, (executable: BootstrapInterface) => {
             executable.run.apply(executable, args);
         });

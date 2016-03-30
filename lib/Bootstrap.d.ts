@@ -4,5 +4,5 @@ export interface BootstrapInterface {
 export default class Bootstrap {
     protected _executables: BootstrapInterface[];
     constructor();
-    run(): void;
+    run(...args: any[]): void;
 }
