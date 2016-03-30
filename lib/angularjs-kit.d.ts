@@ -8,3 +8,4 @@ export * from './NavigationService';
 export * from './KeyCodes';
 export * from './RequestHelper';
 export * from './View';
+export * from './Bootstrap';
