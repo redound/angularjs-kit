@@ -6,8 +6,8 @@ export default class Bootstrap {
 
     protected _executables: BootstrapInterface[];
 
-    public constructor() {
-        this._executables = <any>arguments;
+    public constructor(...args) {
+        this._executables = <any>args;
     }
 
     public run(...args) {
