@@ -1,0 +1,30 @@
+import Logger from "ts-core/lib/Logger/Logger";
+import AuthManager from "ts-auth/lib/Manager";
+import HttpInterceptor, { HttpRequestParamsInterface } from "./HttpInterceptor";
+import { Event } from "ts-core/lib/Events/EventEmitter";
+import { StateChangeEventParamsInterface, default as StateInterceptor } from "./StateInterceptor";
+export default class NavigationService {
+    protected $rootScope: any;
+    protected $state: any;
+    protected $translate: any;
+    protected config: any;
+    protected logger: Logger;
+    protected toastrService: any;
+    protected httpInterceptor: HttpInterceptor;
+    protected stateInterceptor: StateInterceptor;
+    protected authManager: AuthManager;
+    protected redirectUnauthorizedState: string;
+    protected redirectAuthorizedState: string;
+    static $inject: string[];
+    constructor($rootScope: any, $state: any, $translate: any, config: any, logger: Logger, toastrService: any, httpInterceptor: HttpInterceptor, stateInterceptor: StateInterceptor, authManager: AuthManager);
+    init(): void;
+    setRedirectUnauthorizedState(state: string): this;
+    setRedirectAuthorizedState(state: string): this;
+    protected _attachEvents(): void;
+    protected _firstRoute(): void;
+    protected _stateChangeStart(evt: Event<StateChangeEventParamsInterface>): void;
+    protected _httpRequest(evt: Event<HttpRequestParamsInterface>): void;
+    protected _httpResponse401Error(): void;
+    protected _enteringUnauthorizedArea(event: Event<StateChangeEventParamsInterface>): void;
+    protected _enteringAuthorizedArea(event: Event<StateChangeEventParamsInterface>): void;
+}

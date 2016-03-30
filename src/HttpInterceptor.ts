@@ -1,6 +1,6 @@
 import EventEmitter from "ts-core/lib/Events/EventEmitter";
 
-export const HttpInterceptorEvents = {
+export const HTTP_INTERCEPTOR_EVENTS = {
     REQUEST: 'httpRequest',
     REQUEST_ERROR: 'httpRequestError',
     RESPONSE: 'httpResponse',
@@ -45,38 +45,38 @@ export default class HttpInterceptor {
 
     public request = (config) => {
 
-        this.events.trigger(HttpInterceptorEvents.REQUEST, {config: config});
+        this.events.trigger(HTTP_INTERCEPTOR_EVENTS.REQUEST, {config: config});
         return config;
     };
 
     public requestError = (rejection) => {
 
-        this.events.trigger(HttpInterceptorEvents.REQUEST_ERROR, {rejection: rejection});
+        this.events.trigger(HTTP_INTERCEPTOR_EVENTS.REQUEST_ERROR, {rejection: rejection});
         return this.$q.reject(rejection);
     };
 
     public response = (response) => {
 
-        this.events.trigger(HttpInterceptorEvents.RESPONSE, {response: response});
+        this.events.trigger(HTTP_INTERCEPTOR_EVENTS.RESPONSE, {response: response});
         return response;
     };
 
     public responseError = (rejection) => {
 
-        this.events.trigger(HttpInterceptorEvents.RESPONSE_ERROR, {rejection: rejection});
+        this.events.trigger(HTTP_INTERCEPTOR_EVENTS.RESPONSE_ERROR, {rejection: rejection});
 
         /**
          * eg 503, 501, etc. server errors.
          */
         if (rejection.status === 0 || String(rejection.status).charAt(0) === '5') {
-            this.events.trigger(HttpInterceptorEvents.RESPONSE_500_ERRORS, {rejection: rejection});
+            this.events.trigger(HTTP_INTERCEPTOR_EVENTS.RESPONSE_500_ERRORS, {rejection: rejection});
         }
 
         /**
          * Handle the case where the user is not authenticated
          */
         if (rejection.status === 401) {
-            this.events.trigger(HttpInterceptorEvents.RESPONSE_401_ERROR, {rejection: rejection});
+            this.events.trigger(HTTP_INTERCEPTOR_EVENTS.RESPONSE_401_ERROR, {rejection: rejection});
         }
 
         return this.$q.reject(rejection);

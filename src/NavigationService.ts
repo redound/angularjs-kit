@@ -1,10 +1,14 @@
 import Logger from "ts-core/lib/Logger/Logger";
 import AuthManager from "ts-auth/lib/Manager";
-import HttpInterceptor, {HttpInterceptorEvents, HttpRequestParamsInterface} from "./HttpInterceptor";
+import HttpInterceptor, {HttpRequestParamsInterface, HTTP_INTERCEPTOR_EVENTS} from "./HttpInterceptor";
 import {Event} from "ts-core/lib/Events/EventEmitter";
-import {StateInterceptorEvents, StateChangeEventParamsInterface, default as StateInterceptor} from "./StateInterceptor";
+import {
+    STATE_INTERCEPTOR_EVENTS,
+    StateChangeEventParamsInterface,
+    default as StateInterceptor
+} from "./StateInterceptor";
 
-export class AppService {
+export default class NavigationService {
 
     protected redirectUnauthorizedState:string;
     protected redirectAuthorizedState:string;
@@ -21,7 +25,7 @@ export class AppService {
                        protected stateInterceptor:StateInterceptor,
                        protected authManager:AuthManager) {
 
-        this.logger = this.logger.child('AppService');
+        this.logger = this.logger.child('NavigationService');
     }
 
     public init() {
@@ -41,13 +45,13 @@ export class AppService {
 
     protected _attachEvents() {
 
-        this.httpInterceptor.events.on(HttpInterceptorEvents.REQUEST, this._httpRequest, this);
-        this.httpInterceptor.events.on(HttpInterceptorEvents.RESPONSE_401_ERROR, this._httpResponse401Error, this);
+        this.httpInterceptor.events.on(HTTP_INTERCEPTOR_EVENTS.REQUEST, this._httpRequest, this);
+        this.httpInterceptor.events.on(HTTP_INTERCEPTOR_EVENTS.RESPONSE_401_ERROR, this._httpResponse401Error, this);
 
-        this.stateInterceptor.events.on(StateInterceptorEvents.STATE_CHANGE_START, this._stateChangeStart, this);
-        this.stateInterceptor.events.on(StateInterceptorEvents.FIRST_ROUTE, this._firstRoute, this);
-        this.stateInterceptor.events.on(StateInterceptorEvents.ENTERING_UNAUTHORIZED_AREA, this._enteringUnauthorizedArea, this);
-        this.stateInterceptor.events.on(StateInterceptorEvents.ENTERING_AUTHORIZED_AREA, this._enteringAuthorizedArea, this);
+        this.stateInterceptor.events.on(STATE_INTERCEPTOR_EVENTS.STATE_CHANGE_START, this._stateChangeStart, this);
+        this.stateInterceptor.events.on(STATE_INTERCEPTOR_EVENTS.FIRST_ROUTE, this._firstRoute, this);
+        this.stateInterceptor.events.on(STATE_INTERCEPTOR_EVENTS.ENTERING_UNAUTHORIZED_AREA, this._enteringUnauthorizedArea, this);
+        this.stateInterceptor.events.on(STATE_INTERCEPTOR_EVENTS.ENTERING_AUTHORIZED_AREA, this._enteringAuthorizedArea, this);
     }
 
     protected _firstRoute() {
@@ -93,13 +97,13 @@ export class AppService {
      */
     protected _httpResponse401Error() {
 
-        this.authManager.logout().then(() => {
-
-            this.toastrService.info(this.$translate.instant('NOTIFICATIONS.SESSION_EXPIRED'));
-
-            // Redirect unauthorized
-            this.$state.go(this.redirectUnauthorizedState);
-        });
+        // this.authManager.logout().then(() => {
+        //
+        //     this.toastrService.info(this.$translate.instant('NOTIFICATIONS.SESSION_EXPIRED'));
+        //
+        //     // Redirect unauthorized
+        //     this.$state.go(this.redirectUnauthorizedState);
+        // });
     }
 
     /**

@@ -1,13 +1,13 @@
-import EventEmitter from "../typings/browser/definitions/ts-auth/index";
+import EventEmitter from "ts-core/lib/Events/EventEmitter";
 
-export const UIRouterEvents = {
+export const UI_ROUTER_EVENTS = {
     STATE_CHANGE_START: '$stateChangeStart',
     STATE_CHANGE_SUCCESS: '$stateChangeSuccess',
     STATE_CHANGE_ERROR: '$stateChangeError',
     STATE_NOT_FOUND: '$stateNotFound'
 };
 
-export const StateInterceptorEvents = {
+export const STATE_INTERCEPTOR_EVENTS = {
     FIRST_ROUTE: 'firstRoute',
     STATE_CHANGE_START: 'stateChangeStart',
     ENTERING_AUTHORIZED_AREA: 'enteringAuthorizedArea',
@@ -15,7 +15,7 @@ export const StateInterceptorEvents = {
     ENTERING_PUBLIC_AREA: 'enteringPublicArea'
 };
 
-export const StateAccessLevels = {
+export const STATE_ACCESS_LEVELS = {
     PUBLIC: 'public',
     UNAUTHORIZED: 'unauthorized',
     AUTHORIZED: 'authorized'
@@ -46,7 +46,7 @@ export default class StateInterceptor {
     }
 
     private _attachRouterEvents() {
-        this.$rootScope.$on(UIRouterEvents.STATE_CHANGE_START, _.bind(this._$stateChangeStart, this));
+        this.$rootScope.$on(UI_ROUTER_EVENTS.STATE_CHANGE_START, _.bind(this._$stateChangeStart, this));
     }
 
     private _$stateChangeStart(event, toState:any, toParams, fromState:any, fromParams) {
@@ -69,15 +69,15 @@ export default class StateInterceptor {
              */
             switch (toState.accessLevel) {
 
-                case StateAccessLevels.AUTHORIZED:
-                    eventName = StateInterceptorEvents.ENTERING_AUTHORIZED_AREA;
+                case STATE_ACCESS_LEVELS.AUTHORIZED:
+                    eventName = STATE_INTERCEPTOR_EVENTS.ENTERING_AUTHORIZED_AREA;
                     break;
-                case StateAccessLevels.PUBLIC:
-                    eventName = StateInterceptorEvents.ENTERING_PUBLIC_AREA;
+                case STATE_ACCESS_LEVELS.PUBLIC:
+                    eventName = STATE_INTERCEPTOR_EVENTS.ENTERING_PUBLIC_AREA;
                     break;
                 default:
-                case StateAccessLevels.UNAUTHORIZED:
-                    eventName = StateInterceptorEvents.ENTERING_UNAUTHORIZED_AREA;
+                case STATE_ACCESS_LEVELS.UNAUTHORIZED:
+                    eventName = STATE_INTERCEPTOR_EVENTS.ENTERING_UNAUTHORIZED_AREA;
                     break;
             }
 
@@ -91,12 +91,13 @@ export default class StateInterceptor {
 
         if (!this._firstRoute) {
             this._firstRoute = this._lastRoute;
-            this.events.trigger(StateInterceptorEvents.FIRST_ROUTE, params);
+            this.events.trigger(STATE_INTERCEPTOR_EVENTS.FIRST_ROUTE, params);
         }
 
-        this.events.trigger(StateInterceptorEvents.STATE_CHANGE_START, params);
+        this.events.trigger(STATE_INTERCEPTOR_EVENTS.STATE_CHANGE_START, params);
     }
 
     public getFirstRoute() {
         return this._firstRoute;
     }
+}
