@@ -1,6 +1,6 @@
 import SvgIconService from "./SvgIconService";
 
-export class SvgIconDirective {
+export default class SvgIconDirective {
 
     public restrict:string = 'A';
 

@@ -1,5 +1,5 @@
 import SvgIconService from "./SvgIconService";
-export declare class SvgIconDirective {
+export default class SvgIconDirective {
     protected svgIconService: SvgIconService;
     restrict: string;
     constructor(svgIconService: SvgIconService);
