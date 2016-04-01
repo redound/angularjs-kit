@@ -11,7 +11,9 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "tsd": "^0.6.5"
+    "ts-auth": "git+https://github.com/redound/ts-auth.git#dev-package",
+    "ts-core": "git+https://github.com/redound/ts-core.git#dev-package",
+    "ts-data": "git+https://github.com/redound/ts-data.git#dev-package"
   },
   "repository": {
     "type": "git",

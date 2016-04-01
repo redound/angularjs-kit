@@ -7,9 +7,5 @@
     "jquery": "registry:dt/jquery#1.10.0+20160316155526",
     "underscore": "registry:dt/underscore#1.7.0+20160316155526"
   },
-  "dependencies": {
-    "ts-auth": "github:redound/ts-auth#dev-package",
-    "ts-core": "github:redound/ts-core#dev-package",
-    "ts-data": "github:redound/ts-data#dev-package"
-  }
+  "dependencies": {}
 }
