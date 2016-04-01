@@ -1,5 +1,6 @@
 import Dictionary from "ts-core/lib/Data/Dictionary";
 import SvgIcon from "./SvgIcon";
+import * as _ from "underscore";
 
 export default class SvgIconService {
 

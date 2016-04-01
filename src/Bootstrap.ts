@@ -1,3 +1,5 @@
+import * as _ from "underscore";
+
 export interface BootstrapInterface {
     run(module: ng.IModule): void;
 }

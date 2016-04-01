@@ -1,4 +1,5 @@
 import EventEmitter from "ts-core/lib/Events/EventEmitter";
+import * as _ from "underscore";
 
 export const UI_ROUTER_EVENTS = {
     STATE_CHANGE_START: '$stateChangeStart',
