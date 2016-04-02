@@ -3,10 +3,8 @@
   "version": "0.1.0",
   "description": "TypeScript AngularJS Kit",
   "main": "./lib/angularjs-kit.js",
-  "typings": "./lib/angularjs-kit.d.ts",
   "scripts": {
     "test": "",
-    "postinstall": "typings install",
     "build": "tsc"
   },
   "dependencies": {},
