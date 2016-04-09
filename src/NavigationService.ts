@@ -97,13 +97,13 @@ export default class NavigationService {
      */
     protected _httpResponse401Error() {
 
-        // this.authManager.logout().then(() => {
-        //
-        //     this.toastrService.info(this.$translate.instant('NOTIFICATIONS.SESSION_EXPIRED'));
-        //
-        //     // Redirect unauthorized
-        //     this.$state.go(this.redirectUnauthorizedState);
-        // });
+        this.authManager.logout().then(() => {
+
+            this.toastrService.info(this.$translate.instant('NOTIFICATIONS.SESSION_EXPIRED'));
+
+            // Redirect unauthorized
+            this.$state.go(this.redirectUnauthorizedState);
+        });
     }
 
     /**
