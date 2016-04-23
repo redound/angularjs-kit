@@ -70,9 +70,23 @@ export class RequestHelper {
         this._requestPage(this.currentPage);
     }
 
+    public setLoading(loading: boolean = true) {
+        this._loading = true;
+    }
+
+    public startLoading():this {
+        this.setLoading(true);
+        return this;
+    }
+
+    public stopLoading():this {
+        this.setLoading(false);
+        return this;
+    }
+
     private _requestPage(page: number): ng.IPromise<any> {
 
-        this._loading = true;
+        this.startLoading();
 
         var offset = (page - 1) * this.limit;
 
@@ -86,7 +100,7 @@ export class RequestHelper {
         return this._fetchItemsCallback(options).then(items => {
             this._offset = offset;
             this._items = items;
-            this._loading = false;
+            this.stopLoading();
 
             if (this.total > 0 && this.currentPage > this.numPages) {
                 this.page(this.numPages);

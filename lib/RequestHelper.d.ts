@@ -25,6 +25,9 @@ export declare class RequestHelper {
     fetchItemsCallback(callback: any): RequestHelper;
     page(page: number): void;
     reload(): void;
+    setLoading(loading?: boolean): void;
+    startLoading(): this;
+    stopLoading(): this;
     private _requestPage(page);
     setTotal(total: number): RequestHelper;
     setOffset(offset: number): void;
