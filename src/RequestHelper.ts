@@ -71,7 +71,7 @@ export class RequestHelper {
     }
 
     public setLoading(loading: boolean = true) {
-        this._loading = true;
+        this._loading = loading;
     }
 
     public startLoading():this {
